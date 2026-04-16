@@ -1,0 +1,19 @@
+<h1 class="mb-4">Appointments</h1>
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th><th>Pet</th><th>Vet</th><th>Reason</th><th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @appointments.each do |appt| %>
+      <tr>
+        <td><%= link_to appt.date.strftime("%B %d, %Y"), appointment_path(appt) %></td>
+        <td><%= appt.pet.name %></td>
+        <td><%= "#{appt.vet.first_name} #{appt.vet.last_name}" %></td>
+        <td><%= appt.reason %></td>
+        <td><%= appt.status.humanize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

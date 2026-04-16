@@ -1,0 +1,17 @@
+<h1><%= "#{@vet.first_name} #{@vet.last_name}" %></h1>
+<div class="card mb-4">
+  <div class="card-body">
+    <p><strong>Email:</strong> <%= @vet.email %></p>
+    <p><strong>Phone:</strong> <%= @vet.phone %></p>
+    <p><strong>Specialization:</strong> <%= @vet.specialization %></p>
+  </div>
+</div>
+
+<h3>Appointments</h3>
+<ul class="list-group mb-4">
+  <% @vet.appointments.each do |appt| %>
+    <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} — #{appt.pet.name}", appointment_path(appt) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "<- Back to Vets", vets_path, class: "btn btn-secondary" %>
