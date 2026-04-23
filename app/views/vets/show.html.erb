@@ -9,8 +9,12 @@
 
 <h3>Appointments</h3>
 <ul class="list-group mb-4">
-  <% @vet.appointments.each do |appt| %>
-    <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} — #{appt.pet.name}", appointment_path(appt) %></li>
+  <% @vet.appointments.upcoming.each do |appt| %>
+    <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} - #{appt.pet.name}", appointment_path(appt) %></li>
+  <% end %>
+
+  <% @vet.appointments.past.each do |appt| %>
+    <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} - #{appt.pet.name}", appointment_path(appt) %></li>
   <% end %>
 </ul>
 

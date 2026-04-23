@@ -1,17 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  species: MyString
-  breed: MyString
-  date_of_birth: 2026-04-09
-  weight: 9.99
-  owner_id: 1
+  name: Rocky
+  species: dog
+  breed: Labrador
+  date_of_birth: 2020-01-01
+  weight: 20
+  owner: one
 
 two:
-  name: MyString
-  species: MyString
-  breed: MyString
-  date_of_birth: 2026-04-09
-  weight: 9.99
-  owner_id: 1
+  name: Mimi
+  species: cat
+  breed: Persian
+  date_of_birth: 2021-05-01
+  weight: 5
+  owner: two

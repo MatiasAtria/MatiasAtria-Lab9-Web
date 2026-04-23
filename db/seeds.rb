@@ -30,7 +30,7 @@ manuel = Owner.create(
 
 niki = damian.pets.create!(
     name: "Niki",
-    species: "Perro",
+    species: "dog",
     breed: "Terranova",
     date_of_birth: Date.new(2012, 5, 20),
     weight: 30.0,
@@ -38,7 +38,7 @@ niki = damian.pets.create!(
 
 lili = benjamin.pets.create!(
     name: "Liliana Estefania Ernesto Matilde",
-    species: "Gato",
+    species: "cat",
     breed: "Marte",
     date_of_birth: Date.new(2024, 10, 12),
     weight: 5.0,
@@ -46,7 +46,7 @@ lili = benjamin.pets.create!(
 
 judy = manuel.pets.create!(
     name: "Judy Hopps",
-    species: "Conejo",
+    species: "rabbit",
     breed: "Angora",
     date_of_birth: Date.new(2020, 3, 15),
     weight: 2.5,
@@ -54,15 +54,15 @@ judy = manuel.pets.create!(
 
 lulu = benjamin.pets.create!(
     name: "Lulu",
-    species: "Gato",
-    breed: "Siberiano",
+    species: "cat",
+    breed: "Siberian",
     date_of_birth: Date.new(2019, 1, 24),
     weight: 4.5,
 )
 
 capuchina = manuel.pets.create!(
     name: "Capuchina",
-    species: "Gato",
+    species: "cat",
     breed: "Carey",
     date_of_birth: Date.new(2024, 2, 20),
     weight: 3.0,
@@ -73,7 +73,7 @@ dra_atria = Vet.create!(
     last_name: "Atria",
     email: "vanniaatria@gmail.com",
     phone: "987654321",
-    specialization: "Cirugía",
+    specialization: "Surgery",
 )
 
 dr_rivera = Vet.create!(
@@ -81,92 +81,92 @@ dr_rivera = Vet.create!(
     last_name: "Rivera",
     email: "mauricioh126@gmail.com",
     phone: "956032856",
-    specialization: "Medicina General",
+    specialization: "General Medicine",
 )
 
 app1 = Appointment.create!(
     pet: niki,
     vet: dra_atria,
     date: DateTime.new(2024, 7, 15, 10, 0),
-    reason: "Chequeo general",
-    status: 2,
+    reason: "General checkup",
+    status: :completed,
 )
 
 app2 = Appointment.create!(
     pet: lili,
     vet: dr_rivera,
     date: DateTime.new(2024, 7, 16, 14, 30),
-    reason: "Vacunación",
-    status: 1,
+    reason: "Vaccination",
+    status: :in_progress,
 )
 
 app3 = Appointment.create!(
     pet: judy,
     vet: dra_atria,
     date: DateTime.new(2024, 7, 17, 9, 0),
-    reason: "Problemas digestivos",
-    status: 0,
+    reason: "Digestive issues",
+    status: :scheduled,
 )
 
 app4 = Appointment.create!(
     pet: lulu,
     vet: dr_rivera,
     date: DateTime.new(2024, 7, 18, 11, 0),
-    reason: "Chequeo dental",
-    status: 2,
+    reason: "Dental checkup",
+    status: :completed,
 )
 
 app5 = Appointment.create!(
     pet: capuchina,
     vet: dra_atria,
     date: DateTime.new(2024, 7, 19, 15, 0),
-    reason: "Chequeo general",
-    status: 1,
+    reason: "General checkup",
+    status: :in_progress,
 )
 
 app1.treatments.create!(
-    name: "Desparasitación",
+    name: "Deworming",
     medication: "Drontal",
-    dosage: "1 comprimido cada 3 meses",
-    notes: "Repetir en 3 meses",
+    dosage: "1 tablet every 3 months",
+    notes: "Repeat in 3 months",
     administered_at: DateTime.new(2024, 7, 15, 10, 30),
 )
 
 app2.treatments.create!(
-    name: "Vacuna antirrábica",
+    name: "Rabies vaccine",
     medication: "Rabvac 3",
-    dosage: "1 dosis anual",
-    notes: "Repetir anualmente",
+    dosage: "1 annual dose",
+    notes: "Repeat yearly",
     administered_at: DateTime.new(2024, 7, 16, 15, 0),
 )   
 
 app3.treatments.create!(
-    name: "Tratamiento para problemas digestivos",
+    name: "Digestive treatment",
     medication: "Fortiflora",
-    dosage: "1 sobre al día durante 7 días",
-    notes: "Revisar evolución en una semana",
+    dosage: "1 sachet daily for 7 days",
+    notes: "Review progress in one week",
     administered_at: DateTime.new(2024, 7, 17, 9, 30),
 )   
 
 app4.treatments.create!(
-    name: "Limpieza dental",
-    medication: "Ultrasonido",
-    dosage: "Procedimiento único",
-    notes: "Revisar cada 6 meses",
+    name: "Dental cleaning",
+    medication: "Ultrasound",
+    dosage: "Single procedure",
+    notes: "Review every 6 months",
     administered_at: DateTime.new(2024, 7, 18, 11, 30),
 )
 
 app5.treatments.create!(
-    name: "Chequeo general",
+    name: "General checkup",
     medication: "N/A",
     dosage: "N/A",
-    notes: "Todo en orden, repetir chequeo anual",
+    notes: "Everything looks good, repeat yearly checkup",
     administered_at: DateTime.new(2024, 7, 19, 15, 30),
 )
 
-puts "Seed completado exitosamente!"
-puts "Dueños: #{Owner.count}"
-puts "Mascotas: #{Pet.count}"
-puts "Veterinarios: #{Vet.count}"
-puts "Citas: #{Appointment.count}"
-puts "Tratamientos: #{Treatment.count}"
+puts "Seeds completed successfully!"
+puts "Owners: #{Owner.count}"
+puts "Pets: #{Pet.count}"
+puts "Vets: #{Vet.count}"
+puts "Appointments: #{Appointment.count}"
+puts "Treatments: #{Treatment.count}"

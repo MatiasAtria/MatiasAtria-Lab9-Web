@@ -1,15 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  pet_id: 1
-  vet_id: 1
-  date: 2026-04-09 15:05:14
-  reason: MyString
-  status: 1
+  date: 2026-04-30
+  reason: Checkup
+  status: scheduled
+  pet: one
+  vet: one
 
 two:
-  pet_id: 1
-  vet_id: 1
-  date: 2026-04-09 15:05:14
-  reason: MyString
-  status: 1
+  date: 2026-05-10
+  reason: Vaccine
+  status: completed
+  pet: two
+  vet: two
