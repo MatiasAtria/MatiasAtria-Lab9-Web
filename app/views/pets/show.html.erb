@@ -4,7 +4,7 @@
     <p><strong>Species:</strong> <%= @pet.species %></p>
     <p><strong>Breed:</strong> <%= @pet.breed %></p>
     <p><strong>Date of Birth:</strong> <%= @pet.date_of_birth.strftime("%B %d, %Y") if @pet.date_of_birth %></p>
-    <p><strong>Weight:</strong> <%= @pet.weight %></p>
+    <p><strong>Weight:</strong> <%= @pet.weight %> kg</p>
     <p><strong>Owner:</strong> <%= link_to "#{@pet.owner.first_name} #{@pet.owner.last_name}", owner_path(@pet.owner) %></p>
   </div>
 </div>
@@ -14,10 +14,15 @@
   <% @pet.appointments.upcoming.each do |appt| %>
     <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} - #{appt.reason}", appointment_path(appt) %></li>
   <% end %>
-
   <% @pet.appointments.past.each do |appt| %>
     <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} — #{appt.reason}", appointment_path(appt) %></li>
   <% end %>
 </ul>
 
-<%= link_to "<- Back to Pets", pets_path, class: "btn btn-secondary" %>
+<div class="d-flex gap-2">
+  <%= link_to "Edit", edit_pet_path(@pet), class: "btn btn-warning" %>
+  <%= button_to "Delete", pet_path(@pet), method: :delete,
+        data: { turbo_confirm: "Are you sure?" },
+        class: "btn btn-danger" %>
+  <%= link_to "← Back to Pets", pets_path, class: "btn btn-secondary" %>
+</div>

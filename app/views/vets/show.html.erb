@@ -12,10 +12,15 @@
   <% @vet.appointments.upcoming.each do |appt| %>
     <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} - #{appt.pet.name}", appointment_path(appt) %></li>
   <% end %>
-
   <% @vet.appointments.past.each do |appt| %>
     <li class="list-group-item"><%= link_to "#{appt.date.strftime("%B %d, %Y")} - #{appt.pet.name}", appointment_path(appt) %></li>
   <% end %>
 </ul>
 
-<%= link_to "<- Back to Vets", vets_path, class: "btn btn-secondary" %>
+<div class="d-flex gap-2">
+  <%= link_to "Edit", edit_vet_path(@vet), class: "btn btn-warning" %>
+  <%= button_to "Delete", vet_path(@vet), method: :delete,
+        data: { turbo_confirm: "Are you sure?" },
+        class: "btn btn-danger" %>
+  <%= link_to "← Back to Vets", vets_path, class: "btn btn-secondary" %>
+</div>
