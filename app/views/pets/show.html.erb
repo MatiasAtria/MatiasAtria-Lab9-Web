@@ -1,4 +1,15 @@
 <h1><%= @pet.name %></h1>
+
+<div class="mb-3">
+  <% if @pet.photo.attached? %>
+    <%= image_tag @pet.photo, style: "width: 300px;", class: "img-fluid rounded" %>
+  <% else %>
+    <div class="bg-light border rounded d-flex align-items-center justify-content-center" style="width:300px;height:200px;">
+      <span class="text-muted">No photo available</span>
+    </div>
+  <% end %>
+</div>
+
 <div class="card mb-4">
   <div class="card-body">
     <p><strong>Species:</strong> <%= @pet.species %></p>

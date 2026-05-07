@@ -2,10 +2,11 @@ class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pets = Pet.includes(:owner)
+    @pets = Pet.all
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @pet = Pet.new
@@ -20,7 +21,8 @@ class PetsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @pet.update(pet_params)
@@ -42,6 +44,6 @@ class PetsController < ApplicationController
   end
 
   def pet_params
-    params.require(:pet).permit(:name, :species, :breed, :date_of_birth, :weight, :owner_id)
+    params.require(:pet).permit(:name, :species, :breed, :date_of_birth, :weight, :owner_id, :photo)
   end
 end

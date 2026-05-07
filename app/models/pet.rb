@@ -3,6 +3,7 @@ class Pet < ApplicationRecord
 
   belongs_to :owner
   has_many :appointments, dependent: :destroy
+  has_one_attached :photo
 
   before_save :capitalize_name
 
@@ -13,6 +14,7 @@ class Pet < ApplicationRecord
   validates :owner, presence: true
 
   validate :date_of_birth_cannot_be_in_the_future
+  validate :photo_must_be_valid_image
 
   scope :by_species, ->(species) { where(species: species.to_s.downcase) }
 
@@ -27,5 +29,16 @@ class Pet < ApplicationRecord
 
   def capitalize_name
     self.name = name.to_s.strip.titleize
+  end
+end
+
+def photo_must_be_valid_image
+  return unless photo.attached?
+
+  unless photo.content_type.in?(%w[image/png image/jpg image/jpeg])
+    errors.add(:photo, 'must be a PNG, JPG, or JPEG file')
+  end
+  if photo.byte_size > 5.megabytes
+    errors.add(:photo, 'size must be less than 5MB')
   end
 end

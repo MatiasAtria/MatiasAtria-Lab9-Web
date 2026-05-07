@@ -1,28 +1,23 @@
-<<<<<<< HEAD
-# README
+# VetClinic — Lab 7
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+```bash
+bundle install
+bin/rails db:setup
+bin/rails server
+```
 
-* Ruby version
+## System Dependencies
 
-* System dependencies
+**libvips** is required for Active Storage image variants (resizing thumbnails).
 
-* Configuration
+- macOS: `brew install vips`
+- Ubuntu/Debian: `sudo apt install libvips`
+- Arch Linux: `sudo pacman -S libvips`
 
-* Database creation
+## Trix Sanitization Check
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
-# MatiasAtria-Lab3
->>>>>>> 3c32194132dd6b4f37767a266954475944b0b64f
+Pasted `<script>alert(1)</script>` into a Treatment's clinical notes via the Trix editor,
+saved the record, and confirmed that on the show page no alert fired and the script tag
+does not appear in the rendered HTML. Action Text strips it automatically.

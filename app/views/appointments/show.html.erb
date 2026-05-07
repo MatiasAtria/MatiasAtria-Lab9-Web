@@ -26,7 +26,7 @@
   <table class="table table-bordered">
     <thead class="table-light">
       <tr>
-        <th>Name</th><th>Medication</th><th>Dosage</th><th>Administered At</th><th>Notes</th><th>Actions</th>
+        <th>Name</th><th>Medication</th><th>Dosage</th><th>Administered At</th><th>Clinical Notes</th><th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
           <td><%= t.medication %></td>
           <td><%= t.dosage %></td>
           <td><%= t.administered_at&.strftime("%B %d, %Y %H:%M") %></td>
-          <td><%= t.notes %></td>
+          <td><%= t.clinical_notes %></td>
           <td>
             <%= link_to "Edit", edit_appointment_treatment_path(@appointment, t), class: "btn btn-sm btn-warning me-1" %>
             <%= button_to "Delete", appointment_treatment_path(@appointment, t), method: :delete,
