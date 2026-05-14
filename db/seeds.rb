@@ -3,6 +3,34 @@ Appointment.destroy_all
 Pet.destroy_all
 Vet.destroy_all
 Owner.destroy_all
+User.destroy_all
+
+admin_user = User.create!(
+  first_name: "Admin",
+  last_name: "VetClinic",
+  email: "admin@vetclinic.com",
+  password: "password123",
+  password_confirmation: "password123",
+  role: :admin
+)
+
+vet_user = User.create!(
+  first_name: "Vannia",
+  last_name: "Atria",
+  email: "vet@vetclinic.com",
+  password: "password123",
+  password_confirmation: "password123",
+  role: :vet
+)
+
+owner_user = User.create!(
+  first_name: "Damian",
+  last_name: "Vega",
+  email: "owner@vetclinic.com",
+  password: "password123",
+  password_confirmation: "password123",
+  role: :owner
+)
 
 damian = Owner.create!(
   first_name: "Damian",

@@ -1,23 +1,27 @@
-# VetClinic — Lab 7
+# VetClinic — Lab 8
 
-## Setup
+A veterinary clinic management application built with Ruby on Rails.
 
-```bash
-bundle install
-bin/rails db:setup
-bin/rails server
-```
+## Authentication
 
-## System Dependencies
+Authentication is **required** to access all VetClinic resource pages (owners, pets, vets, appointments, treatments). The home page (`/`) is public.
 
-**libvips** is required for Active Storage image variants (resizing thumbnails).
+Authentication is handled by [Devise](https://github.com/heartcombo/devise).
 
-- macOS: `brew install vips`
-- Ubuntu/Debian: `sudo apt install libvips`
-- Arch Linux: `sudo pacman -S libvips`
+## Seeded Users
 
-## Trix Sanitization Check
+Run `bin/rails db:drop db:create db:migrate db:seed` to set up the database with the following users:
 
-Pasted `<script>alert(1)</script>` into a Treatment's clinical notes via the Trix editor,
-saved the record, and confirmed that on the show page no alert fired and the script tag
-does not appear in the rendered HTML. Action Text strips it automatically.
+| Role  | Email                  | Password    |
+|-------|------------------------|-------------|
+| Admin | admin@vetclinic.com    | password123 |
+| Vet   | vet@vetclinic.com      | password123 |
+| Owner | owner@vetclinic.com    | password123 |
+
+## Notes
+
+- The `role` field is stored on the User model as an integer enum (owner: 0, vet: 1, admin: 2). It is **not** assignable from any user-facing form — role assignment happens only via seeds or the Rails console.
+- Flash messages (sign-in, sign-out, errors) use the shared `layouts/_flash` partial from Lab 5.
+- Devise views are styled with Bootstrap 5, consistent with the rest of the application.
+- After sign-up, the user is automatically signed in (Devise default behavior).
+- Sign-out uses the DELETE HTTP verb via `button_to`.
