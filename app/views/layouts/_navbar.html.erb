@@ -4,31 +4,34 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item"><%= link_to "Owners", owners_path, class: "nav-link" %></li>
+          <% if policy(Owner).index? %>
+            <li class="nav-item"><%= link_to "Owners", owners_path, class: "nav-link" %></li>
+          <% end %>
           <li class="nav-item"><%= link_to "Pets", pets_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "Vets", vets_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "Appointments", appointments_path, class: "nav-link" %></li>
+          <% if current_user.owner && policy(current_user.owner).show? %>
+            <li class="nav-item"><%= link_to "My Account", owner_path(current_user.owner), class: "nav-link" %></li>
+          <% end %>
         <% end %>
       </ul>
+
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
             <span class="nav-link text-light">
               <%= current_user.first_name %> <%= current_user.last_name %>
+              <span class="badge bg-secondary ms-1"><%= current_user.role %></span>
             </span>
           </li>
           <li class="nav-item">
             <%= link_to "Edit Account", edit_user_registration_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= button_to "Sign Out", destroy_user_session_path,
-                method: :delete,
-                class: "btn btn-outline-light btn-sm ms-2",
-                data: { turbo_method: :delete } %>
+            <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm ms-2", data: { turbo_method: :delete } %>
           </li>
         <% else %>
           <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
         <% end %>
       </ul>
     </div>

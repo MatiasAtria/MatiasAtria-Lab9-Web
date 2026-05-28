@@ -30,15 +30,15 @@ class Pet < ApplicationRecord
   def capitalize_name
     self.name = name.to_s.strip.titleize
   end
-end
 
-def photo_must_be_valid_image
-  return unless photo.attached?
+  def photo_must_be_valid_image
+    return unless photo.attached?
 
-  unless photo.content_type.in?(%w[image/png image/jpg image/jpeg])
-    errors.add(:photo, 'must be a PNG, JPG, or JPEG file')
-  end
-  if photo.byte_size > 5.megabytes
-    errors.add(:photo, 'size must be less than 5MB')
+    unless photo.content_type.in?(%w[image/png image/jpg image/jpeg])
+      errors.add(:photo, 'must be a PNG, JPG, or JPEG file')
+    end
+    if photo.byte_size > 5.megabytes
+      errors.add(:photo, 'size must be less than 5MB')
+    end
   end
 end

@@ -5,29 +5,60 @@
     <%= f.label :date, class: "form-label" %>
     <%= f.datetime_field :date, class: "form-control" %>
   </div>
+
   <div class="mb-3">
     <%= f.label :reason, class: "form-label" %>
     <%= f.text_area :reason, class: "form-control", rows: 3 %>
   </div>
+
   <div class="mb-3">
     <%= f.label :status, class: "form-label" %>
     <%= f.select :status,
-          Appointment.statuses.keys.map { |s| [s.humanize, s] },
-          { prompt: "Select status" },
-          { class: "form-select" } %>
+                 Appointment.statuses.keys.map { |s| [s.humanize, s] },
+                 { prompt: "Select status" },
+                 { class: "form-select" } %>
   </div>
-  <div class="mb-3">
-    <%= f.label :pet_id, "Pet", class: "form-label" %>
-    <%= f.collection_select :pet_id, Pet.order(:name), :id, :name,
-          { prompt: "Select a pet" },
-          { class: "form-select" } %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :vet_id, "Vet", class: "form-label" %>
-    <%= f.collection_select :vet_id, Vet.order(:last_name), :id,
-          ->(v) { "#{v.first_name} #{v.last_name}" },
-          { prompt: "Select a vet" },
-          { class: "form-select" } %>
-  </div>
+
+  <% if current_user.admin? %>
+    <div class="mb-3">
+      <%= f.label :pet_id, "Pet", class: "form-label" %>
+      <%= f.collection_select :pet_id, Pet.order(:name), :id, :name,
+                              { prompt: "Select a pet" },
+                              { class: "form-select" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :vet_id, "Vet", class: "form-label" %>
+      <%= f.collection_select :vet_id, Vet.order(:last_name), :id,
+                              ->(v) { "#{v.first_name} #{v.last_name}" },
+                              { prompt: "Select a vet" },
+                              { class: "form-select" } %>
+    </div>
+  <% elsif current_user.vet? %>
+    <div class="mb-3">
+      <%= f.label :pet_id, "Pet", class: "form-label" %>
+      <%= f.collection_select :pet_id, Pet.order(:name), :id, :name,
+                              { prompt: "Select a pet" },
+                              { class: "form-select" } %>
+    </div>
+
+    <%= f.hidden_field :vet_id, value: current_user.vet&.id %>
+  <% elsif current_user.owner? %>
+    <div class="mb-3">
+      <%= f.label :pet_id, "Pet", class: "form-label" %>
+      <%= f.collection_select :pet_id, current_user.owner&.pets&.order(:name) || Pet.none, :id, :name,
+                              { prompt: "Select a pet" },
+                              { class: "form-select" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :vet_id, "Vet", class: "form-label" %>
+      <%= f.collection_select :vet_id, Vet.order(:last_name), :id,
+                              ->(v) { "#{v.first_name} #{v.last_name}" },
+                              { prompt: "Select a vet" },
+                              { class: "form-select" } %>
+    </div>
+  <% end %>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

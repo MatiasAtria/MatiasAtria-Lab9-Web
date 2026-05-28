@@ -24,15 +24,15 @@
     <%= f.label :weight, class: "form-label" %>
     <%= f.number_field :weight, step: 0.1, class: "form-control" %>
   </div>
-  <div class="mb-3">
-    <%= f.label :owner_id, "Owner", class: "form-label" %>
-    <%= f.collection_select :owner_id, Owner.order(:last_name), :id,
-          ->(o) { "#{o.first_name} #{o.last_name}" },
-          { prompt: "Select an owner" },
-          { class: "form-select" } %>
-  </div>
-
-  <%# ── NUEVO: foto ── %>
+  <% if current_user.admin? %>
+    <div class="mb-3">
+      <%= f.label :owner_id, "Owner", class: "form-label" %>
+      <%= f.collection_select :owner_id, Owner.order(:last_name), :id,
+            ->(o) { "#{o.first_name} #{o.last_name}" },
+            { prompt: "Select an owner" },
+            { class: "form-select" } %>
+    </div>
+  <% end %>
   <div class="mb-3">
     <%= f.label :photo, class: "form-label" %>
     <% if @pet.persisted? && @pet.photo.attached? %>
@@ -43,6 +43,5 @@
     <% end %>
     <%= f.file_field :photo, class: "form-control", accept: "image/jpeg,image/png,image/webp" %>
   </div>
-
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

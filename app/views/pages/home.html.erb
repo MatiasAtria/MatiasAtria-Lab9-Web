@@ -1,10 +1,10 @@
 <div class="text-center py-5">
   <h1 class="display-4">Welcome to VetClinic</h1>
   <p class="lead">Manage your veterinary clinic efficiently.</p>
+
   <% if user_signed_in? %>
     <%= link_to "Go to Owners", owners_path, class: "btn btn-primary btn-lg mt-3" %>
   <% else %>
-    <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg mt-3 me-2" %>
-    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-primary btn-lg mt-3" %>
+    <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg mt-3" %>
   <% end %>
 </div>

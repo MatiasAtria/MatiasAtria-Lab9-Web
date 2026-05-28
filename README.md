@@ -1,27 +1,22 @@
-# VetClinic — Lab 8
+# VetClinic
 
-A veterinary clinic management application built with Ruby on Rails.
+VetClinic now enforces authorization with Pundit. Admin users can manage every resource. Vet users can read all owners, pets, and vets, but they can only manage appointments and treatments assigned to themselves, and they can edit only their own Vet record. Owner users can manage only their own Owner record, only their own pets, and only appointments belonging to their pets. Treatments are only manageable through the appointment they belong to.
 
-## Authentication
+## Seeded users
 
-Authentication is **required** to access all VetClinic resource pages (owners, pets, vets, appointments, treatments). The home page (`/`) is public.
+### Admin
+- admin@vetclinic.com / password123
 
-Authentication is handled by [Devise](https://github.com/heartcombo/devise).
+### Vets
+- vet@vetclinic.com / password123
+- vet2@vetclinic.com / password123
 
-## Seeded Users
-
-Run `bin/rails db:drop db:create db:migrate db:seed` to set up the database with the following users:
-
-| Role  | Email                  | Password    |
-|-------|------------------------|-------------|
-| Admin | admin@vetclinic.com    | password123 |
-| Vet   | vet@vetclinic.com      | password123 |
-| Owner | owner@vetclinic.com    | password123 |
+### Owners
+- owner@vetclinic.com / password123
+- owner2@vetclinic.com / password123
 
 ## Notes
 
-- The `role` field is stored on the User model as an integer enum (owner: 0, vet: 1, admin: 2). It is **not** assignable from any user-facing form — role assignment happens only via seeds or the Rails console.
-- Flash messages (sign-in, sign-out, errors) use the shared `layouts/_flash` partial from Lab 5.
-- Devise views are styled with Bootstrap 5, consistent with the rest of the application.
-- After sign-up, the user is automatically signed in (Devise default behavior).
-- Sign-out uses the DELETE HTTP verb via `button_to`.
+- User self-registration is disabled.
+- Owners and vets are linked to their business records through `user_id`.
+- The app is designed so `db:drop db:create db:migrate db:seed` works on a fresh database.

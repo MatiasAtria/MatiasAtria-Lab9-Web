@@ -1,4 +1,5 @@
 <h1><%= "#{@owner.first_name} #{@owner.last_name}" %></h1>
+
 <div class="card mb-4">
   <div class="card-body">
     <p><strong>Email:</strong> <%= @owner.email %></p>
@@ -15,9 +16,13 @@
 </ul>
 
 <div class="d-flex gap-2">
-  <%= link_to "Edit", edit_owner_path(@owner), class: "btn btn-warning" %>
-  <%= button_to "Delete", owner_path(@owner), method: :delete,
-        data: { turbo_confirm: "Are you sure?" },
-        class: "btn btn-danger" %>
-  <%= link_to "← Back to Owners", owners_path, class: "btn btn-secondary" %>
+  <% if policy(@owner).edit? %>
+    <%= link_to "Edit", edit_owner_path(@owner), class: "btn btn-warning" %>
+  <% end %>
+  <% if policy(@owner).destroy? %>
+    <%= button_to "Delete", owner_path(@owner), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  <% end %>
+  <% if policy(Owner).index? %>
+    <%= link_to "Back to Owners", owners_path, class: "btn btn-secondary" %>
+  <% end %>
 </div>
