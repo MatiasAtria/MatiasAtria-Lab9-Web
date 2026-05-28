@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_28_173333) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_28_184119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -71,7 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_28_173333) do
     t.string "phone"
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_owners_on_user_id"
+    t.index ["user_id"], name: "index_owners_on_user_id", unique: true
   end
 
   create_table "pets", force: :cascade do |t|
@@ -119,7 +119,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_28_173333) do
     t.string "specialization"
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_vets_on_user_id"
+    t.index ["user_id"], name: "index_vets_on_user_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
